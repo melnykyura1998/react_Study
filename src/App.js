@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Users from "./components/users";
+import {useState} from "react";
+import UserDeteil from "./components/userDeteil";
+import Posts from "./components/posts";
 
 function App() {
+    const [userDetail,setUserDetail] = useState(null)
+    const [showPosts,setShowPosts]=useState(false)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div className={'top'}><Users setUserDetail={setUserDetail} setShowPosts={setShowPosts}/>
+            {userDetail && <UserDeteil user={userDetail}  setShowPosts={setShowPosts}  />}
+        </div>
+        {showPosts && <Posts userId = {userDetail.id}/>}
     </div>
   );
 }
